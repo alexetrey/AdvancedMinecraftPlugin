@@ -1,0 +1,98 @@
+# Advanced Minecraft Plugin - Config File
+# Edit these settings for your server
+
+database:
+  # MongoDB address (where player data is stored)
+  mongo_uri: "mongodb://localhost:27017"
+  # Name of your database
+  database_name: "minecraft_plugin"
+
+redis:
+  # Redis server (for syncing between servers)
+  host: "localhost"
+  port: 6379
+  password: ""
+  database: 0
+
+grpc:
+  # Turn on if you want to use the gRPC API
+  enabled: false
+  port: 9090
+  secret_key: "change_this_secret_key"
+
+plugin:
+  auto_save:
+    enabled: true
+    interval_seconds: 300  # How often to save (in seconds)
+  debug_mode: false
+  economy:
+    starting_balance: 1000.0  # New players start with this much money
+    currency_symbol: "$"
+    max_balance: 1000000.0  # Maximum balance (0 = no limit)
+    min_balance: 0.0  # Minimum balance
+  inventory:
+    auto_save_on_quit: true
+    max_inventories_per_player: 10
+  ender_chest:
+    auto_save_on_quit: true
+    max_ender_chests_per_player: 10
+
+messages:
+  errors:
+    no_permission: "&cYou don't have permission to use this command"
+    player_not_found: "&cPlayer not found: {player}"
+    database_error: "&cDatabase error occurred"
+    invalid_amount: "&cInvalid amount: {amount}"
+    player_offline: "&cPlayer must be online"
+  
+  economy:
+    balance: "&aYour balance: &e{currency}{balance}"
+    balance_other: "&a{player}'s balance: &e{currency}{balance}"
+    balance_set: "&aSet {player}'s balance to &e{currency}{balance}"
+    balance_added: "&aAdded &e{currency}{amount} &ato {player}'s balance"
+    balance_removed: "&aRemoved &e{currency}{amount} &afrom {player}'s balance"
+    transfer_success: "&aTransferred &e{currency}{amount} &afrom &e{from_player} &ato &e{to_player}"
+    transfer_failed: "&cTransfer failed: insufficient funds"
+    updated: "&aEconomy updated: {operation} - {currency}{balance}"
+  
+  inventory:
+    saved: "&aSaved inventory for &e{player}"
+    saved_self: "&aSaved inventory as &e{name}"
+    loaded: "&aLoaded inventory for &e{player}"
+    loaded_self: "&aLoaded inventory &e{name}"
+    updated: "&aUpdated inventory for &e{player}"
+    cleared: "&aCleared inventory for &e{player}"
+    backed_up: "&aCreated backup &e{name} &afor &e{player}"
+    restored: "&aRestored backup &e{name} &afor &e{player}"
+    deleted: "&aDeleted inventory for &e{player}"
+    all_deleted: "&aDeleted all inventories for &e{player}"
+    not_found: "&cInventory not found for &e{player}"
+    not_found_self: "&cInventory &e{name} &cnot found"
+    backup_not_found: "&cBackup &e{name} &cnot found for &e{player}"
+    no_saved_inventories: "&cNo saved inventories found"
+    no_saved_inventories_self: "&cYou have no saved inventories"
+    list_header: "&aSaved inventories for &e{player}:"
+    list_header_self: "&aYour saved inventories:"
+    list_item: "&7- &f{name} &8({date})"
+    updated: "&aInventory updated: {operation} - {name}"
+  
+  ender_chest:
+    saved: "&aSaved ender chest for &e{player}"
+    saved_self: "&aSaved ender chest as &e{name}"
+    loaded: "&aLoaded ender chest for &e{player}"
+    loaded_self: "&aLoaded ender chest &e{name}"
+    updated: "&aUpdated ender chest for &e{player}"
+    cleared: "&aCleared ender chest for &e{player}"
+    backed_up: "&aCreated backup &e{name} &afor &e{player}"
+    restored: "&aRestored backup &e{name} &afor &e{player}"
+    deleted: "&aDeleted ender chest for &e{player}"
+    all_deleted: "&aDeleted all ender chests for &e{player}"
+    not_found: "&cEnder chest not found for &e{player}"
+    not_found_self: "&cEnder chest &e{name} &cnot found"
+    backup_not_found: "&cBackup &e{name} &cnot found for &e{player}"
+    no_saved_ender_chests: "&cNo saved ender chests found"
+    no_saved_ender_chests_self: "&cYou have no saved ender chests"
+    list_header: "&aSaved ender chests for &e{player}:"
+    list_header_self: "&aYour saved ender chests:"
+    list_item: "&7- &f{name} &8({date})"
+    updated: "&aEnder chest updated: {operation} - {name}" 

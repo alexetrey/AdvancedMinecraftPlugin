@@ -1,0 +1,60 @@
+name: AdvancedMinecraftPlugin
+version: '${version}'
+main: com.minecraftplugin.AdvancedMinecraftPlugin
+api-version: '1.21'
+description: Advanced Minecraft Plugin with Economy, Inventory, and gRPC Systems
+author: [alexetrey]
+commands:
+  money:
+    description: Economy management commands
+    usage: /money <get|set|add|remove|transfer> [player] [amount]
+    aliases: [economy, bal, balance]
+    permission: advancedplugin.economy
+    permission-message: You don't have permission to use this command
+  
+  inv:
+    description: Inventory management commands
+    usage: /inv <save|load|update|clear|backup|restore|info|delete|deleteall|list> [player] [name]
+    aliases: [inventory]
+    permission: advancedplugin.inventory
+    permission-message: You don't have permission to use this command
+  
+  ec:
+    description: Ender chest management commands
+    usage: /ec <save|load|update|clear|backup|restore|info|delete|deleteall|list> [player] [name]
+    aliases: [enderchest]
+    permission: advancedplugin.enderchest
+    permission-message: You don't have permission to use this command
+  
+  plugin:
+    description: Player self-management commands
+    usage: /plugin <balance|inventory|enderchest|help> [action] [name]
+    aliases: [p, my]
+    permission: advancedplugin.player
+    permission-message: You don't have permission to use this command
+
+permissions:
+  advancedplugin.*:
+    description: Gives access to all AdvancedMinecraftPlugin commands
+    children:
+      advancedplugin.economy: true
+      advancedplugin.inventory: true
+      advancedplugin.enderchest: true
+      advancedplugin.player: true
+    default: op
+  
+  advancedplugin.economy:
+    description: Allows use of economy commands
+    default: op
+  
+  advancedplugin.inventory:
+    description: Allows use of inventory management commands
+    default: op
+  
+  advancedplugin.enderchest:
+    description: Allows use of ender chest management commands
+    default: op
+  
+  advancedplugin.player:
+    description: Allows players to manage their own data
+    default: true 

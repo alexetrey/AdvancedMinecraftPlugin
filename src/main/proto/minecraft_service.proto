@@ -1,0 +1,328 @@
+syntax = "proto3";
+
+package com.minecraftplugin.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.minecraftplugin.grpc";
+option java_outer_classname = "MinecraftServiceProto";
+
+// The Minecraft service definition
+service MinecraftService {
+  // Economy operations
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse);
+  rpc SetBalance (SetBalanceRequest) returns (SetBalanceResponse);
+  rpc AddBalance (AddBalanceRequest) returns (AddBalanceResponse);
+  rpc RemoveBalance (RemoveBalanceRequest) returns (RemoveBalanceResponse);
+  rpc TransferBalance (TransferBalanceRequest) returns (TransferBalanceResponse);
+  
+  // Inventory operations
+  rpc GetInventory (GetInventoryRequest) returns (GetInventoryResponse);
+  rpc SaveInventory (SaveInventoryRequest) returns (SaveInventoryResponse);
+  rpc UpdateInventory (UpdateInventoryRequest) returns (UpdateInventoryResponse);
+  rpc ClearInventory (ClearInventoryRequest) returns (ClearInventoryResponse);
+  rpc BackupInventory (BackupInventoryRequest) returns (BackupInventoryResponse);
+  rpc RestoreInventory (RestoreInventoryRequest) returns (RestoreInventoryResponse);
+  rpc GetInventoryInfo (GetInventoryInfoRequest) returns (GetInventoryInfoResponse);
+  rpc DeleteInventory (DeleteInventoryRequest) returns (DeleteInventoryResponse);
+  rpc DeleteAllInventories (DeleteAllInventoriesRequest) returns (DeleteAllInventoriesResponse);
+  rpc GetSavedInventories (GetSavedInventoriesRequest) returns (GetSavedInventoriesResponse);
+  
+  // Ender chest operations
+  rpc GetEnderChest (GetEnderChestRequest) returns (GetEnderChestResponse);
+  rpc SaveEnderChest (SaveEnderChestRequest) returns (SaveEnderChestResponse);
+  rpc UpdateEnderChest (UpdateEnderChestRequest) returns (UpdateEnderChestResponse);
+  rpc ClearEnderChest (ClearEnderChestRequest) returns (ClearEnderChestResponse);
+  rpc BackupEnderChest (BackupEnderChestRequest) returns (BackupEnderChestResponse);
+  rpc RestoreEnderChest (RestoreEnderChestRequest) returns (RestoreEnderChestResponse);
+  rpc GetEnderChestInfo (GetEnderChestInfoRequest) returns (GetEnderChestInfoResponse);
+  rpc DeleteEnderChest (DeleteEnderChestRequest) returns (DeleteEnderChestResponse);
+  rpc DeleteAllEnderChests (DeleteAllEnderChestsRequest) returns (DeleteAllEnderChestsResponse);
+  rpc GetSavedEnderChests (GetSavedEnderChestsRequest) returns (GetSavedEnderChestsResponse);
+  
+  // Health check
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+// Authentication metadata
+message AuthMetadata {
+  string secret_key = 1;
+}
+
+// Economy requests and responses
+message GetBalanceRequest {
+  string player_uuid = 1;
+}
+
+message GetBalanceResponse {
+  bool success = 1;
+  double balance = 2;
+  string error_message = 3;
+}
+
+message SetBalanceRequest {
+  string player_uuid = 1;
+  double balance = 2;
+}
+
+message SetBalanceResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message AddBalanceRequest {
+  string player_uuid = 1;
+  double amount = 2;
+}
+
+message AddBalanceResponse {
+  bool success = 1;
+  double new_balance = 2;
+  string error_message = 3;
+}
+
+message RemoveBalanceRequest {
+  string player_uuid = 1;
+  double amount = 2;
+}
+
+message RemoveBalanceResponse {
+  bool success = 1;
+  double new_balance = 2;
+  string error_message = 3;
+}
+
+message TransferBalanceRequest {
+  string from_player_uuid = 1;
+  string to_player_uuid = 2;
+  double amount = 3;
+}
+
+message TransferBalanceResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+// Inventory requests and responses
+message GetInventoryRequest {
+  string player_uuid = 1;
+  string inventory_name = 2;
+}
+
+message GetInventoryResponse {
+  bool success = 1;
+  string inventory_data = 2;
+  string error_message = 3;
+}
+
+message SaveInventoryRequest {
+  string player_uuid = 1;
+  string inventory_name = 2;
+  string inventory_data = 3;
+}
+
+message SaveInventoryResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message UpdateInventoryRequest {
+  string player_uuid = 1;
+  string inventory_name = 2;
+  string inventory_data = 3;
+}
+
+message UpdateInventoryResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message ClearInventoryRequest {
+  string player_uuid = 1;
+}
+
+message ClearInventoryResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message BackupInventoryRequest {
+  string player_uuid = 1;
+  string backup_name = 2;
+}
+
+message BackupInventoryResponse {
+  bool success = 1;
+  string backup_name = 2;
+  string error_message = 3;
+}
+
+message RestoreInventoryRequest {
+  string player_uuid = 1;
+  string backup_name = 2;
+}
+
+message RestoreInventoryResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message GetInventoryInfoRequest {
+  string player_uuid = 1;
+  string inventory_name = 2;
+}
+
+message GetInventoryInfoResponse {
+  bool success = 1;
+  string name = 2;
+  int64 size = 3;
+  string created = 4;
+  string error_message = 5;
+}
+
+message DeleteInventoryRequest {
+  string player_uuid = 1;
+  string inventory_name = 2;
+}
+
+message DeleteInventoryResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message DeleteAllInventoriesRequest {
+  string player_uuid = 1;
+}
+
+message DeleteAllInventoriesResponse {
+  bool success = 1;
+  int32 deleted_count = 2;
+  string error_message = 3;
+}
+
+message GetSavedInventoriesRequest {
+  string player_uuid = 1;
+}
+
+message GetSavedInventoriesResponse {
+  bool success = 1;
+  repeated string inventory_names = 2;
+  string error_message = 3;
+}
+
+// Ender chest requests and responses
+message GetEnderChestRequest {
+  string player_uuid = 1;
+  string ender_chest_name = 2;
+}
+
+message GetEnderChestResponse {
+  bool success = 1;
+  string ender_chest_data = 2;
+  string error_message = 3;
+}
+
+message SaveEnderChestRequest {
+  string player_uuid = 1;
+  string ender_chest_name = 2;
+  string ender_chest_data = 3;
+}
+
+message SaveEnderChestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message UpdateEnderChestRequest {
+  string player_uuid = 1;
+  string ender_chest_name = 2;
+  string ender_chest_data = 3;
+}
+
+message UpdateEnderChestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message ClearEnderChestRequest {
+  string player_uuid = 1;
+}
+
+message ClearEnderChestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message BackupEnderChestRequest {
+  string player_uuid = 1;
+  string backup_name = 2;
+}
+
+message BackupEnderChestResponse {
+  bool success = 1;
+  string backup_name = 2;
+  string error_message = 3;
+}
+
+message RestoreEnderChestRequest {
+  string player_uuid = 1;
+  string backup_name = 2;
+}
+
+message RestoreEnderChestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message GetEnderChestInfoRequest {
+  string player_uuid = 1;
+  string ender_chest_name = 2;
+}
+
+message GetEnderChestInfoResponse {
+  bool success = 1;
+  string name = 2;
+  int64 size = 3;
+  string created = 4;
+  string error_message = 5;
+}
+
+message DeleteEnderChestRequest {
+  string player_uuid = 1;
+  string ender_chest_name = 2;
+}
+
+message DeleteEnderChestResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message DeleteAllEnderChestsRequest {
+  string player_uuid = 1;
+}
+
+message DeleteAllEnderChestsResponse {
+  bool success = 1;
+  int32 deleted_count = 2;
+  string error_message = 3;
+}
+
+message GetSavedEnderChestsRequest {
+  string player_uuid = 1;
+}
+
+message GetSavedEnderChestsResponse {
+  bool success = 1;
+  repeated string ender_chest_names = 2;
+  string error_message = 3;
+}
+
+// Health check
+message HealthCheckRequest {
+  string service_name = 1;
+}
+
+message HealthCheckResponse {
+  bool healthy = 1;
+  string status = 2;
+  int64 timestamp = 3;
+} 
